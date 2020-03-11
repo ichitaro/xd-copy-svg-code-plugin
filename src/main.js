@@ -6,9 +6,10 @@ const commands = require('commands')
 const { createDialog, error } = require('./lib/dialogs.js')
 const optimize = require('./optimize.js')
 const convertAllTextsToPaths = require('./convert-all-texts-to-paths.js')
+const svg2css = require('./svg2css.js')
 
 // Main function
-async function copySvgCode(selection) {
+async function copySvgCode(toCSS, selection) {
   // Error if nothing selected
   if (!selection.hasArtwork) {
     error('No SVG selected', 'Please select an SVG before running.')
@@ -45,17 +46,28 @@ async function copySvgCode(selection) {
 
   // Read tmp file and generate SVG code
   const markup = await file.read()
-  const { data } = await optimize(markup)
-  const svgCode = escapeHtml(data)
+  const { data, info } = await optimize(markup)
 
-  // Copy to clipboard too!
-  clipboard.copyText(data)
+  if (toCSS) {
+    const css = svg2css('double', data, info)
+    const escaped = escapeHtml(css)
 
-  // Show output dialog
-  await createDialog({
-    title: 'SVG Output',
-    template: () => `<input value="${svgCode}">`
-  })
+    clipboard.copyText(css)
+
+    await createDialog({
+      title: 'CSS Output',
+      template: () => `<textarea rows="10" cols="60">${escaped}</textarea>`
+    })
+  } else {
+    const escaped = escapeHtml(data)
+
+    clipboard.copyText(data)
+
+    await createDialog({
+      title: 'SVG Output',
+      template: () => `<input value="${escaped}">`
+    })
+  }
 }
 
 // Helper(s)
@@ -71,6 +83,7 @@ function escapeHtml(unsafe) {
 // Exports
 module.exports = {
   commands: {
-    copySvgCode
+    copySvgCode: copySvgCode.bind(null, false),
+    copySvgAsBackgroundImage: copySvgCode.bind(null, true)
   }
 }

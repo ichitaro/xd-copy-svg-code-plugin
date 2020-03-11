@@ -49,6 +49,15 @@
         "mac": "Ctrl+Option+C",
         "win": "Ctrl+Alt+C"
       }
+    },
+    {
+      "type": "menu",
+      "label": "Copy SVG as background-image",
+      "commandId": "copySvgAsBackgroundImage",
+      "shortcut": {
+        "mac": "Ctrl+Option+B",
+        "win": "Ctrl+Alt+B"
+      }
     }
   ]
 }
