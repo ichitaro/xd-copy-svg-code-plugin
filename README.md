@@ -10,8 +10,6 @@
 
 ## Install
 
-### From the XD market
-
 ### From GitHub releases
 
 Head over to the [Latest Releases](https://github.com/ichitaro/xd-copy-svg-code-plugin/releases) page and then downloaded the newest `.xdx` file. Once downloaded, double click to install!
