@@ -11,5 +11,14 @@ module.exports = {
     application: 'application',
     clipboard: 'clipboard',
     commands: 'commands'
-  }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'transform-loader?brfs'
+      }
+    ]
+  },
+  node: { fs: 'empty' }
 }

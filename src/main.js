@@ -4,6 +4,7 @@ const application = require('application')
 const clipboard = require('clipboard')
 const commands = require('commands')
 const { createDialog, error } = require('./lib/dialogs.js')
+const optimize = require('./optimize.js')
 
 // Main function
 async function copySvgCode(selection) {
@@ -40,10 +41,11 @@ async function copySvgCode(selection) {
 
   // Read tmp file and generate SVG code
   const markup = await file.read()
-  const svgCode = escapeHtml(markup)
+  const { data } = await optimize(markup)
+  const svgCode = escapeHtml(data)
 
   // Copy to clipboard too!
-  clipboard.copyText(markup)
+  clipboard.copyText(data)
 
   // Show output dialog
   await createDialog({
