@@ -8,6 +8,7 @@ module.exports = {
   devtool: 'none',
   externals: {
     uxp: 'uxp',
+    scenegraph: 'scenegraph',
     application: 'application',
     clipboard: 'clipboard',
     commands: 'commands'

@@ -5,6 +5,7 @@ const clipboard = require('clipboard')
 const commands = require('commands')
 const { createDialog, error } = require('./lib/dialogs.js')
 const optimize = require('./optimize.js')
+const convertAllTextsToPaths = require('./convert-all-texts-to-paths.js')
 
 // Main function
 async function copySvgCode(selection) {
@@ -13,6 +14,9 @@ async function copySvgCode(selection) {
     error('No SVG selected', 'Please select an SVG before running.')
     return
   }
+
+  // Convert all texts to paths
+  convertAllTextsToPaths(selection)
 
   // Group if multiple selections
   if (selection.items.length >= 2) {
