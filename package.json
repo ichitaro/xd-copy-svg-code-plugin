@@ -25,6 +25,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "mini-svg-data-uri": "^1.2.3",
     "svgo": "^1.3.2"
   },
   "prettier": {

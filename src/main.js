@@ -49,7 +49,7 @@ async function copySvgCode(toCSS, selection) {
   const { data, info } = await optimize(markup)
 
   if (toCSS) {
-    const css = svg2css('double', data, info)
+    const css = svg2css(data, info)
     const escaped = escapeHtml(css)
 
     clipboard.copyText(css)
