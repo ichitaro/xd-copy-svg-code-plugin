@@ -37,7 +37,7 @@ async function copySvgCode(toCSS, selection) {
       outputFile: file,
       type: application.RenditionType.SVG,
       minify: true,
-      embedImages: false
+      embedImages: true
     }
   ]
 
